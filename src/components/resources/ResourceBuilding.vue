@@ -1,11 +1,13 @@
 <template>
-    {{resourceName}}
-    <building :name="building1.name" @buyEmit="buy" :owned="building1.owned" :baseCost="building1.baseCost" :scaling="building1.scaling" :canBuyNext="building1.canBuyNext" :nextResourceCost="building1.nextResourceCost"></building>
+    <div>
+        <h4>{{resourceName}}</h4>
+        <building :name="getBuilding1.name" @buyEmit="buy" :owned="getBuilding1.owned" :baseCost="getBuilding1.baseCost" :scaling="getBuilding1.scaling" :canBuyNext="getBuilding1.canBuyNext" :nextResourceCost="getBuilding1.nextResourceCost"></building>
+    </div>
 </template>
 
 <script>
     // import {canBuy, nextCost} from "../../utils/cost";
-    import building1 from "./attributes/building-1";
+    import {mapActions, mapGetters} from "vuex";
     import Building from "./Building";
 
     export default {
@@ -17,25 +19,20 @@
                 required: true
             },
         },
-        data() {
-            return {
-                building1: {
-                    owned: 0,
-                    canBuyNext: false,
-                    nextResourceCost: 10,
-                    ...building1
-                }
-            }
-        },
         methods: {
             buy() {
-                if (this.canBuyNext) {
+                if (this.getBuilding1.canBuyNext) {
+                    this.buyBuilding1();
                     // this.resource -= nextCost(this.baseCost, this.scaling, this.owned);
                     // this.owned++;
                     // this.nextResourceCost = nextCost(this.baseCost, this.scaling, this.owned);
                     // this.canBuyNext = canBuy(this.resource, this.baseCost, this.scaling, this.owned);
                 }
             },
+            ...mapActions("resource1Store", ["buyBuilding1"]),
+        },
+        computed: {
+            ...mapGetters("resource1Store", ["getBuilding1"]),
         }
     }
 </script>

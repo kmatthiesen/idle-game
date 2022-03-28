@@ -5,9 +5,9 @@
 </template>
 
 <script>
-
     export default {
         name: "Building",
+        emits: ["buyEmit"],
         props: {
             name: {
                 type: String,
