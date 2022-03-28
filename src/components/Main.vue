@@ -8,6 +8,7 @@
 <script>
 import ResourceBuilding from "./resources/ResourceBuilding";
 import {sleep, TIME} from "../utils/time";
+import {mapActions} from "vuex";
 export default {
   name: 'Main',
   components: {ResourceBuilding},
@@ -16,11 +17,11 @@ export default {
   },
   methods: {
     async loop() {
-      // this.resource += (this.owned * 1.5);
-      // this.canBuyNext = canBuy(this.resource, this.baseCost, this.scaling, this.owned);
-      await sleep(TIME.SECOND);
+      await sleep(TIME.SECOND / 200);
+      this.nextTick();
       this.loop();
-    }
+    },
+    ...mapActions(["nextTick"])
   }
  }
 </script>

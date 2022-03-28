@@ -1,27 +1,16 @@
 import { createStore } from 'vuex'
-import resource1Store from "@/store/resource1Store";
+import goldStore from "@/store/goldStore";
 
 export default createStore({
-  state: {
-    resource1: 10
-  },
-  getters: {
-    getResource1(state) {
-      return state.resource1;
-    }
-  },
-  mutations: {
-    generateResources(state, payload) {
-      console.log(payload);
-      state.resource1++;
-    }
-  },
+  state: {},
+  getters: {},
+  mutations: {},
   actions: {
-    nextTick({commit}, payload) {
-      commit("generateResources", payload);
+    nextTick({dispatch}) {
+      dispatch("goldStore/nextTick");
     }
   },
   modules: {
-    resource1Store
+    goldStore
   }
 })

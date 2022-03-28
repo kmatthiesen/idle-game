@@ -1,7 +1,7 @@
-export function nextCost(base, scaling, owned) {
-    return Math.trunc((owned ^ scaling) + base);
+export function nextCost(base, baseScaling, owned) {
+    return Math.round(base + (base * owned) ** calculateScaling(baseScaling, owned));
 }
 
-export function canBuy(resource, base, scaling, owned) {
-    return resource >= nextCost(base, scaling, owned);
+function calculateScaling(baseScaling, owned) {
+    return baseScaling + Math.trunc(owned / 25) * 0.1;
 }
