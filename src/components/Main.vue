@@ -1,25 +1,26 @@
 <template>
   <div class="hello">
-    <resource-building resourceName="Gold" />
+    <resource-building/>
 
   </div>
 </template>
 
 <script>
 import ResourceBuilding from "./resources/ResourceBuilding";
-import {sleep, TIME} from "../utils/time";
 import {mapActions} from "vuex";
 export default {
   name: 'Main',
   components: {ResourceBuilding},
   mounted() {
-    this.loop();
+    window.requestAnimationFrame(this.loop);
   },
   methods: {
-    async loop() {
-      await sleep(TIME.SECOND / 200);
-      this.nextTick();
-      this.loop();
+    /**
+     * Main game loop function. Runs based on the requestAnimationFrame functionality. Sends an action to the store to generate resources.
+     */
+    loop(timestamp) {
+      this.nextTick(timestamp);
+      window.requestAnimationFrame(this.loop);
     },
     ...mapActions(["nextTick"])
   }

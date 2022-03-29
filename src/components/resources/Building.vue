@@ -1,7 +1,9 @@
 <template>
-    {{displayName}}: {{owned}}
-    Next Cost: {{nextResourceCost}}
-    <button v-on:click="buy()" :disabled="!this.canBuyNext">Increase Amount</button>
+    <div>
+        {{displayName}}: {{owned}}
+        Next Cost: {{nextResourceCost}}
+        <button v-on:click="buy()" :disabled="!this.canBuyNext">Buy</button>
+    </div>
 </template>
 
 <script>
@@ -26,7 +28,7 @@
                 required: true
             },
             nextResourceCost: {
-                type: Number,
+                type: String,
                 required: true
             },
         },
