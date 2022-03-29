@@ -3,6 +3,7 @@
         {{displayName}}: {{owned}}
         Next Cost: {{nextResourceCost}}
         <button v-on:click="buy()" :disabled="!this.canBuyNext">Buy</button>
+        {{perSecond}} / sec
     </div>
 </template>
 
@@ -31,6 +32,10 @@
                 type: String,
                 required: true
             },
+            perSecond: {
+                type: Number,
+                required: true
+            }
         },
         methods: {
             buy() {
