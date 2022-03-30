@@ -6,7 +6,6 @@
         <building :displayName="building3.displayName" :buildingId="building3.id" @buyEmit="buy" :owned="building3.owned" :canBuyNext="canBuyNextBuilding(building3)" :nextResourceCost="displayNumber(building3.nextResourceCost)" :perSecond="building3.perSecond"></building>
         <building :displayName="building4.displayName" :buildingId="building4.id" @buyEmit="buy" :owned="building4.owned" :canBuyNext="canBuyNextBuilding(building4)" :nextResourceCost="displayNumber(building4.nextResourceCost)" :perSecond="building4.perSecond"></building>
         <building :displayName="building5.displayName" :buildingId="building5.id" @buyEmit="buy" :owned="building5.owned" :canBuyNext="canBuyNextBuilding(building5)" :nextResourceCost="displayNumber(building5.nextResourceCost)" :perSecond="building5.perSecond"></building>
-<!--        <Building/>-->
     </div>
 </template>
 
@@ -25,7 +24,7 @@
         },
         methods: {
             buy(buildingId) {
-                if (this.canBuyNextBuilding(this.getBuilding(buildingId))) {
+                if (this.canBuyNextBuilding(this[buildingId])) {
                     this.buyBuilding(buildingId);
                 }
             },
