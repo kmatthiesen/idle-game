@@ -1,7 +1,12 @@
-export const BUILDING_ID = {
-    building1: "building1",
-    building2: "building2",
-    building3: "building3",
-    building4: "building4",
-    building5: "building5",
+/**
+ * The id values for the gold based buildings.
+ * 
+ * @type {{goldBuilding1: string, goldBuilding2: string, goldBuilding3: string, goldBuilding4: string, goldBuilding5: string}}
+ */
+export const GOLD_BUILDING_ID = {
+    goldBuilding1: "goldBuilding1",
+    goldBuilding2: "goldBuilding2",
+    goldBuilding3: "goldBuilding3",
+    goldBuilding4: "goldBuilding4",
+    goldBuilding5: "goldBuilding5",
 };

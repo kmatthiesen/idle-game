@@ -1,5 +1,5 @@
 import {generateResource, nextCost, roundToTwo} from "@/utils/cost";
-import {BUILDING_ID} from "@/utils/id-values";
+import {GOLD_BUILDING_ID} from "@/utils/id-values";
 
 export default {
     namespaced: true,
@@ -11,8 +11,8 @@ export default {
             perSecond: 0
         },
         buildings: {
-            [BUILDING_ID.building1]: {
-                id: BUILDING_ID.building1,
+            [GOLD_BUILDING_ID.goldBuilding1]: {
+                id: GOLD_BUILDING_ID.goldBuilding1,
                 displayName: "Building-1",
                 baseCost: 10,
                 baseScaling: 0.9,
@@ -21,8 +21,8 @@ export default {
                 value: 1,
                 perSecond: 0
             },
-            [BUILDING_ID.building2]: {
-                id: BUILDING_ID.building2,
+            [GOLD_BUILDING_ID.goldBuilding2]: {
+                id: GOLD_BUILDING_ID.goldBuilding2,
                 displayName: "Building-2",
                 baseCost: 100,
                 baseScaling: 0.92,
@@ -31,8 +31,8 @@ export default {
                 value: 10,
                 perSecond: 0
             },
-            [BUILDING_ID.building3]: {
-                id: BUILDING_ID.building3,
+            [GOLD_BUILDING_ID.goldBuilding3]: {
+                id: GOLD_BUILDING_ID.goldBuilding3,
                 displayName: "Building-3",
                 baseCost: 2000,
                 baseScaling: 0.93,
@@ -41,8 +41,8 @@ export default {
                 value: 150,
                 perSecond: 0
             },
-            [BUILDING_ID.building4]: {
-                id: BUILDING_ID.building4,
+            [GOLD_BUILDING_ID.goldBuilding4]: {
+                id: GOLD_BUILDING_ID.goldBuilding4,
                 displayName: "Building-4",
                 baseCost: 30000,
                 baseScaling: 0.95,
@@ -51,8 +51,8 @@ export default {
                 value: 1000,
                 perSecond: 0
             },
-            [BUILDING_ID.building5]: {
-                id: BUILDING_ID.building5,
+            [GOLD_BUILDING_ID.goldBuilding5]: {
+                id: GOLD_BUILDING_ID.goldBuilding5,
                 displayName: "Building-5",
                 baseCost: 150000,
                 baseScaling: 1,
