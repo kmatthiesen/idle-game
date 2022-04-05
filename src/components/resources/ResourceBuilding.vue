@@ -1,6 +1,7 @@
 <template>
     <div>
-        <building v-for="building in this.buildingIds" :key="[building].id" :displayName="[building].displayName" :buildingId="[building].id" @buyEmit="buy" :owned="[building].owned" :canBuyNext="canBuyNextBuilding([building])" :nextResourceCost="displayNumber(this[building].nextResourceCost)" :perSecond="[building].perSecond"/>
+        <building v-for="building in this.buildingIds" :key="[building].id" :displayName="this[building].displayName" :buildingId="this[building].id" @buyEmit="buy"
+                  :owned="this[building].owned" :canBuyNext="canBuyNextBuilding(this[building])" :nextResourceCost="this[building].nextResourceCost" :perSecond="this[building].perSecond"/>
     </div>
 </template>
 
@@ -27,7 +28,7 @@
 
             buy(buildingId) {
                 if (this.canBuyNextBuilding(this[buildingId])) {
-                    this.buyBuilding(buildingId);
+                    this.buyBuilding(buildingId, -1);
                 }
             },
 

@@ -14,3 +14,14 @@ export function buildGetters(component, idValues, baseGetter) {
         });
     }
 }
+
+export function calculatePerSecond(buildings) {
+    let perSecond = 0;
+    objectForEach(buildings, building => {
+        console.log(perSecond);
+        perSecond += building.perSecond;
+        console.log(perSecond);
+    });
+    console.log(perSecond);
+    return parseInt(perSecond);
+}

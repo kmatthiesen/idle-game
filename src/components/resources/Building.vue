@@ -1,13 +1,15 @@
 <template>
     <div>
-        {{displayName}}: {{owned}}
-        Next Cost: {{nextResourceCost}}
+        {{displayName}}: {{displayNumber(owned)}}
+        Next Cost: {{displayNumber(nextResourceCost)}}
         <button v-on:click="buy()" :disabled="!this.canBuyNext">Buy</button>
-        {{perSecond}} / sec
+        {{displayNumber(perSecond)}} / sec
     </div>
 </template>
 
 <script>
+    import {displayNumber} from "../../utils/number";
+
     export default {
         name: "Building",
         emits: ["buyEmit"],
@@ -29,7 +31,7 @@
                 required: true
             },
             nextResourceCost: {
-                type: String,
+                type: Number,
                 required: true
             },
             perSecond: {
@@ -43,6 +45,7 @@
                     this.$emit("buyEmit", this.buildingId);
                 }
             },
+            displayNumber
         }
     }
 </script>

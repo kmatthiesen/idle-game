@@ -1,3 +1,5 @@
+import { cloneDeep }  from "lodash";
+
 /**
  * Calculates the cost of the next building
  *
@@ -8,6 +10,28 @@
  */
 export function nextCost(base, baseScaling, owned) {
     return Math.round(base + (base * owned) ** (baseScaling + (owned * 0.01)));
+}
+
+export function buyBuildings(building, resource, amountToBuy) {
+    let currentBuilding = cloneDeep(building);
+
+    let bought = 0;
+    while (resource - building.nextResourceCost >= 0 || bought < amountToBuy) {
+        resource = resource - building.nextResourceCost;
+        buyBuilding(currentBuilding, resource);
+        bought++
+    }
+
+    return {
+        currentBuilding,
+        resource
+    }
+}
+
+export function buyBuilding(building) {
+    building.owned++;
+    building.nextResourceCost = nextCost(building.baseCost, building.baseScaling, building.owned);
+    building.perSecond = building.owned * building.value;
 }
 
 /**
