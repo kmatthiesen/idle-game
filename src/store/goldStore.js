@@ -1,7 +1,6 @@
-import {buyBuildings, generateResource, roundToTwo} from "@/utils/cost";
+import {generateResource, roundToTwo} from "@/utils/cost";
 import {GOLD_BUILDING_ID} from "@/utils/id-values";
 import {calculatePerSecond} from "@/utils/store-util";
-// import {cloneDeep} from "lodash";
 
 export default {
     namespaced: true,
@@ -77,15 +76,14 @@ export default {
         },
     },
     mutations: {
-        buyBuilding(state, buildingId, amount) {
-            let building = state.buildings[buildingId];
-            let outcome = buyBuildings(building, state.gold.amount, amount);
+        buyBuilding(state, buyOrder) {
+            let building = state.buildings[buyOrder.building.id];
 
-            building.owned = outcome.currentBuilding.owned;
-            building.nextResourceCost = outcome.currentBuilding.nextResourceCost;
-            building.perSecond = outcome.currentBuilding.perSecond;
+            building.owned = buyOrder.building.owned;
+            building.nextResourceCost = buyOrder.building.nextResourceCost;
+            building.perSecond = buyOrder.building.perSecond;
 
-            state.gold.amount = outcome.resource;
+            state.gold.amount -= buyOrder.cost;
             state.gold.perSecond = calculatePerSecond(state.buildings);
         },
         nextTick(state, timeTaken) {
