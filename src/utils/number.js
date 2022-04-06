@@ -5,5 +5,6 @@
  * @returns {string} A string of the given number with separators.
  */
 export function displayNumber(number) {
-    return parseInt(number.toFixed(0)).toLocaleString();
+    let num = parseFloat(number);
+    return parseInt(num.toFixed(0)).toLocaleString();
 }

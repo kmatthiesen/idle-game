@@ -1,3 +1,5 @@
+import { cloneDeep }  from "lodash";
+
 /**
  * Calculates the cost of the next building
  *
@@ -8,6 +10,46 @@
  */
 export function nextCost(base, baseScaling, owned) {
     return Math.round(base + (base * owned) ** (baseScaling + (owned * 0.01)));
+}
+
+/**
+ * Creates a buy order describing the cost and amount of a particular building.
+ *
+ * Amount describes the number of the building that can be bought.
+ * Cost is the total cost for buying that amount of buildings.
+ *
+ * @param building {Object} The building to calculate a buy order for.
+ * @param resource {Number} The amount of resource available to spend.
+ * @param amountToBuy {Number} The max amount to buy of the building. -1 for max amount.
+ * @returns {{amount: number, cost: number, building: *}} A buy order object containing the info on how many and how much it will cost to buy a building.
+ */
+export function createBuyOrder(building, resource, amountToBuy) {
+
+    let buyOrder = {
+        amount: 0,
+        building: cloneDeep(building),
+        cost: 0
+    };
+
+    while (buyOrder.amount !== amountToBuy && ((buyOrder.amount < amountToBuy && amountToBuy !== -1 ) || resource - buyOrder.building.nextResourceCost >= 0 )) {
+        buyOrder.cost += buyOrder.building.nextResourceCost;
+        resource = resource - buyOrder.building.nextResourceCost;
+        buyBuilding(buyOrder.building);
+        buyOrder.amount++
+    }
+
+    return buyOrder;
+}
+
+/**
+ * Performs the buying of a building and modifies the buildings attributes as needed.
+ *
+ * @param building {Object} The building to purchase.
+ */
+export function buyBuilding(building) {
+    building.owned++;
+    building.nextResourceCost = nextCost(building.baseCost, building.baseScaling, building.owned);
+    building.perSecond = building.owned * building.value;
 }
 
 /**

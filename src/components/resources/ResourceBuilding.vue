@@ -1,6 +1,7 @@
 <template>
     <div>
-        <building v-for="building in this.buildingIds" :key="[building].id" :displayName="[building].displayName" :buildingId="[building].id" @buyEmit="buy" :owned="[building].owned" :canBuyNext="canBuyNextBuilding([building])" :nextResourceCost="displayNumber(this[building].nextResourceCost)" :perSecond="[building].perSecond"/>
+        <BuyButtons @setBuyAmountEmit="setBuyAmount" />
+        <building v-for="building in this.buildingIds" :key="[building].id" @buyEmit="buy" :building="this[building]"  :resource="getGold.amount" :buyAmount="buyAmount" />
     </div>
 </template>
 
@@ -10,14 +11,20 @@
     import Building from "./Building";
     import {displayNumber} from "../../utils/number";
     import {buildGetters} from "../../utils/store-util";
+    import BuyButtons from "./BuyButtons";
 
     export default {
         name: "ResourceBuilding",
-        components: {Building},
+        components: {BuyButtons, Building},
         props: {
             buildingIds: {
                 type: Object,
                 required: true
+            }
+        },
+        data() {
+            return {
+                buyAmount: 1
             }
         },
         created() {
@@ -25,14 +32,12 @@
         },
         methods: {
 
-            buy(buildingId) {
-                if (this.canBuyNextBuilding(this[buildingId])) {
-                    this.buyBuilding(buildingId);
-                }
+            buy(buyOrder) {
+                this.buyBuilding(buyOrder);
             },
 
-            canBuyNextBuilding(building) {
-                return this.getGold.amount >= building.nextResourceCost;
+            setBuyAmount(amount) {
+                this.buyAmount = amount;
             },
 
             ...mapActions("goldStore", ["buyBuilding"]),
