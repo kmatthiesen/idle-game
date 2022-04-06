@@ -10,3 +10,24 @@ export const GOLD_BUILDING_ID = {
     goldBuilding4: "goldBuilding4",
     goldBuilding5: "goldBuilding5",
 };
+
+/**
+ * The id values for the resource stores.
+ *
+ * @type {{goldStore: string}}
+ */
+export const STORE_RESOURCE_ID = {
+    goldStore: "goldStore"
+};
+
+export const RESOURCE_ID = {
+    gold: "gold"
+};
+
+export const STORE_RESOURCE_MAP = {
+    [STORE_RESOURCE_ID.goldStore]: {
+        id: STORE_RESOURCE_ID.goldStore,
+        resource: RESOURCE_ID.gold,
+        buildingIds: GOLD_BUILDING_ID
+    }
+};

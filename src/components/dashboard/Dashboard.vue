@@ -1,6 +1,6 @@
 <template>
     <div class="wrapper">
-        <ResourceDisplay :resource="getGold" />
+        <ResourceDisplay :resource="getResource" />
         <br />
     </div>
 </template>
@@ -14,7 +14,7 @@
         name: "Dashboard",
         components: {ResourceDisplay},
         computed: {
-            ...mapGetters("goldStore", ["getGold"])
+            ...mapGetters("goldStore", ["getResource"])
         }
     }
 </script>

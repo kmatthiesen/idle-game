@@ -1,7 +1,7 @@
 <template>
     <div class="hello">
         <dashboard/>
-        <resource-building :buildingIds="this.goldBuildingIds"/>
+        <resource-building v-for="storeResource in this.storeResourceMap" :key="storeResource.id" :buildingIds="storeResource.buildingIds" :storeId="storeResource.id" />
 
     </div>
 </template>
@@ -11,14 +11,14 @@
 
     import ResourceBuilding from "./resources/ResourceBuilding";
     import Dashboard from "./dashboard/Dashboard";
-    import {GOLD_BUILDING_ID} from "../utils/id-values";
+    import {STORE_RESOURCE_MAP} from "../utils/id-values";
 
     export default {
         name: 'Main',
         components: {Dashboard, ResourceBuilding},
         data() {
             return {
-                goldBuildingIds: {...GOLD_BUILDING_ID}
+                storeResourceMap: {...STORE_RESOURCE_MAP},
             }
         },
         mounted() {

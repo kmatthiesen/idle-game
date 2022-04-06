@@ -1,7 +1,7 @@
 <template>
     <div>
         <BuyButtons @setBuyAmountEmit="setBuyAmount" />
-        <building v-for="building in this.buildingIds" :key="[building].id" @buyEmit="buy" :building="this[building]"  :resource="getGold.amount" :buyAmount="buyAmount" />
+        <building v-for="building in this.buildingIds" :key="[building].id" @buyEmit="buy" :building="this[building]"  :resource="getResource(this.storeId).amount" :buyAmount="buyAmount" />
     </div>
 </template>
 
@@ -20,6 +20,10 @@
             buildingIds: {
                 type: Object,
                 required: true
+            },
+            storeId: {
+                type: String,
+                required: true
             }
         },
         data() {
@@ -28,11 +32,12 @@
             }
         },
         created() {
-            buildGetters(this, this.buildingIds, this.getBuilding);
+            buildGetters(this, this.storeId, this.buildingIds, this.getBuilding);
         },
         methods: {
 
             buy(buyOrder) {
+                buyOrder.store = this.storeId;
                 this.buyBuilding(buyOrder);
             },
 
@@ -40,12 +45,12 @@
                 this.buyAmount = amount;
             },
 
-            ...mapActions("goldStore", ["buyBuilding"]),
+            ...mapActions(["buyBuilding"]),
 
             displayNumber,
         },
         computed: {
-            ...mapGetters("goldStore", ["getGold", "getBuilding"]),
+            ...mapGetters(["getResource", "getBuilding"]),
         }
     }
 </script>

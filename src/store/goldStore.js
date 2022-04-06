@@ -1,12 +1,12 @@
 import {generateResource, roundToTwo} from "@/utils/cost";
-import {GOLD_BUILDING_ID} from "@/utils/id-values";
+import {GOLD_BUILDING_ID, RESOURCE_ID} from "@/utils/id-values";
 import {calculatePerSecond} from "@/utils/store-util";
 
 export default {
     namespaced: true,
     state: {
-        gold: {
-            id: "gold",
+        resource: {
+            id: RESOURCE_ID.gold,
             displayName: "Gold",
             amount: 10,
             perSecond: 0
@@ -68,11 +68,8 @@ export default {
         getBuilding: (state) => (id) => {
             return state.buildings[id];
         },
-        getGold(state) {
-            return state.gold;
-        },
-        getGoldAmount(state) {
-            return state.gold.amount;
+        getResource(state) {
+            return state.resource;
         },
     },
     mutations: {
@@ -83,8 +80,8 @@ export default {
             building.nextResourceCost = buyOrder.building.nextResourceCost;
             building.perSecond = buyOrder.building.perSecond;
 
-            state.gold.amount -= buyOrder.cost;
-            state.gold.perSecond = calculatePerSecond(state.buildings);
+            state.resource.amount -= buyOrder.cost;
+            state.resource.perSecond = calculatePerSecond(state.buildings);
         },
         nextTick(state, timeTaken) {
             let amountGenerated = 0;
@@ -92,12 +89,12 @@ export default {
                 amountGenerated += generateResource(state.buildings[key].owned, state.buildings[key].value, timeTaken);
 
             });
-            state.gold.amount = roundToTwo(state.gold.amount + amountGenerated);
+            state.resource.amount = roundToTwo(state.resource.amount + amountGenerated);
         }
     },
     actions: {
-        buyBuilding({commit}, buildingId) {
-            commit("buyBuilding", buildingId);
+        buyBuilding({commit}, buyOrder) {
+            commit("buyBuilding", buyOrder);
         },
         nextTick({commit}, timeTaken) {
             commit("nextTick", timeTaken);

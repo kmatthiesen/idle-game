@@ -1,9 +1,8 @@
 <template>
     <div>
-        {{building.displayName}}: <NumberDisplay :number="building.owned" />
-        Next Cost: <NumberDisplay :number="building.nextResourceCost" />
-        <button v-on:click="buy()" :disabled="!this.canBuyNext">Buy <NumberDisplay :number="buyOrder.amount" /> (<NumberDisplay :number="buyOrder.cost" /> ) </button>
-        <NumberDisplay :number="building.perSecond" /> / sec
+        <span>{{building.displayName}}: <NumberDisplay :number="building.owned" /></span>
+        <span> <NumberDisplay :number="building.perSecond" /> / sec </span>
+        <button v-on:click="buy()" :disabled="!this.canBuyNext">Buy <NumberDisplay :number="buyOrder.amount" /> (<NumberDisplay :number="costDisplay" /> ) </button>
     </div>
 </template>
 
@@ -44,6 +43,9 @@
             },
             buyOrder() {
                 return createBuyOrder(this.building, this.resource, this.buyAmount);
+            },
+            costDisplay() {
+                return this.buyOrder.cost !== 0 ? this.buyOrder.cost : this.building.nextResourceCost;
             }
         }
     }
