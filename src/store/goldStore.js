@@ -1,6 +1,8 @@
 import {generateResource, roundToTwo} from "@/utils/cost";
 import {GOLD_BUILDING_ID, RESOURCE_ID} from "@/utils/id-values";
 import {calculatePerSecond} from "@/utils/store-util";
+import _ from "lodash";
+import {mergeObjects, objectForEach} from "@/utils/object";
 
 export default {
     namespaced: true,
@@ -90,6 +92,9 @@ export default {
 
             });
             state.resource.amount = roundToTwo(state.resource.amount + amountGenerated);
+        },
+        load(state, savedState) {
+
         }
     },
     actions: {
@@ -98,6 +103,9 @@ export default {
         },
         nextTick({commit}, timeTaken) {
             commit("nextTick", timeTaken);
+        },
+        load({commit}, savedState) {
+            commit("load", savedState);
         }
     },
 }

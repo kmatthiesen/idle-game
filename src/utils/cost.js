@@ -1,4 +1,4 @@
-import { cloneDeep }  from "lodash";
+import _  from "lodash";
 
 /**
  * Calculates the cost of the next building
@@ -27,7 +27,7 @@ export function createBuyOrder(building, resource, amountToBuy) {
 
     let buyOrder = {
         amount: 0,
-        building: cloneDeep(building),
+        building: _.cloneDeep(building),
         cost: 0
     };
 

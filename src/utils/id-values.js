@@ -31,3 +31,8 @@ export const STORE_RESOURCE_MAP = {
         buildingIds: GOLD_BUILDING_ID
     }
 };
+
+export const MODULE_ID = {
+    root: "root",
+    ...STORE_RESOURCE_ID
+};

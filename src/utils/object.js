@@ -7,3 +7,8 @@
 export function objectForEach(object, callback) {
     Object.keys(object).forEach( callback );
 }
+
+export function mergeObjects(object1, object2) {
+
+
+}
